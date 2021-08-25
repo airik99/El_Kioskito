@@ -35,7 +35,19 @@ foreverAlone(Persona, Dia, HoraAtiende) :-
     not((quienAtiende(OtraPersona, HoraAtiende, Dia), Persona \= OtraPersona)).
 
 % ----------  PUNTO 4 ---------- 
-    
+% este fue sacado de la resolución porque no me salio xd
+posibilidadesAtencion(Dia, Personas):-
+    findall(Persona, distinct(Persona, quienAtiende(Persona, _, Dia)), PersonasPosibles),
+    combinar(PersonasPosibles, Personas).
+  
+combinar([], []).
+
+combinar([Persona|PersonasPosibles], [Persona|Personas]):-
+    combinar(PersonasPosibles, Personas).
+
+combinar([_|PersonasPosibles], Personas):-
+    combinar(PersonasPosibles, Personas).
+
 % ----------  PUNTO 5 ---------- 
 
 venta(dodain, fecha(lunes, 10, agosto), [golosinas(1200), cigarrillos([jockey]), golosinas(50)]).
